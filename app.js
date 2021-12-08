@@ -70,8 +70,12 @@ app.use(bodyParser.urlencoded({extended:true}))
     r.res.send(addr)
 })
 .post('/insert/', async r=>{
-const {login,password,URL}=r.body;
+
+try {const {login,password,URL}=r.body; 
+console.log("r.body"+r.body);
 const data=new User({login,password});
+
+
 try{
   await m.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true});
   try{
@@ -84,7 +88,8 @@ try{
 }
 catch(e){
   console.log(e.codeName);
-}   
+}   }
+catch(r) {console.log(r);}
 })
  
 
