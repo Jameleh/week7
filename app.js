@@ -90,7 +90,7 @@ try{
   }
 }
 catch(e){
-  console.log(`error with connect with dp ${e.codeName}`);
+  console.log(`error with connect with dp ${e}`);
 }   }
 )
  
