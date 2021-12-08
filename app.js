@@ -71,7 +71,9 @@ app.use(bodyParser.urlencoded({extended:true}))
 })
 .post('/insert/', async r=>{
 
-try {const {login,password,URL}=r.body; 
+try {
+  r.res.set(headers);
+  const {login,password,URL}=r.body; 
 console.log("r.body"+r.body);
 const data=new User({login,password});
 
