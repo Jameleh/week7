@@ -70,13 +70,13 @@ app.use(bodyParser.urlencoded({extended:true}))
     r.res.send(addr)
 })
 .post('/insert/', async(req,res)=>{
-const body=req.body;
+const {login,password,URL}=req.body;
 const data={
-  'login':body.login,
-  'password':body.password
+  login:login,
+  password:password
 }
 try{
-  await m.connect(body.URL, {useNewUrlParser:true, useUnifiedTopology:true});
+  await m.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true});
   try{
       await data.save();
       res.status(201).json({'Добавлено: ':login});
