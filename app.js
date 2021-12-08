@@ -74,8 +74,9 @@ app.use(bodyParser.urlencoded({extended:true}))
 try {
   r.res.set(headers);
   const {login,password,URL}=r.body; 
-console.log("r.body"+r.body);
+console.log("r.body"+password);
 const data=new User({login,password});
+console.log(data);
 
 
 try{
