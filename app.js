@@ -1,5 +1,5 @@
 
-export default function appexp(express,bodyParser,fs,crypto,http,path)
+export default function appexp(express,bodyParser,fs,crypto,http,path,User,m)
 {
   
 //As a result of its work, the exported function must return an instance of a ready-to-run Express application.
@@ -71,10 +71,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 })
 .post('/insert/', async(req,res)=>{
 const {login,password,URL}=req.body;
-const data={
-  login:login,
-  password:password
-}
+const data=new User({login,password})
 try{
   await m.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true});
   try{
