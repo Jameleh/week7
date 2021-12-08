@@ -93,6 +93,19 @@ catch(e){
   console.log(`error with connect with dp ${e}`);
 }   }
 )
- 
+.all('/render/',async(req,res)=>{
+  res.set(headersCORS);
+  const {addr} = req.query;
+  const {random2, random3} = req.body;
+  
+  http.get(addr,(r, body='') => {
+      r
+      .on('data',data=>body+=data)
+      .on('end',()=>{
+          fs.writeFileSync('index.pug', body);
+          res.render('index',{login:'itmo308556',random2,random3})
+      })
+  })
+})
 
 return app;}

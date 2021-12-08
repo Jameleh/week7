@@ -1,0 +1,16 @@
+Your login for point 5.1 of the task: itmo308556
+
+Additional routes this week:
+
+- Along the route / login /, the application, as before, should display your login in the openedu system in plain text.
+Example: https://week8.kodaktor.ru/login/
+- Along the route / wordpress / the application should display the main page of Wordpress - in other words, you need to deploy a copy of Wordpress according to the video tutorial and configure the server so that this route can be used to access this instance of the site. The site should have one post with ID 1, and the title value of this single post should be your login from paragraph 5.1.
+Example: https://week8.kodaktor.ru/wordpress/
+(when checking, an API call is made using the / wordpress / wp-json / wp / v2 / sub-route)
+- Along the route / render /, the application must receive the body of the POST request in the application / json format, which is a string, the result of serializing an object with fields random2 and random3. Also, the application must accept a querystring variable named addr. As the value of the addr variable, the application is offered the address where the pug-template is located, into which the values ​​random2 and random3 are substituted. Reacting to the route, the application should render this template with these values ​​and return HTML markup as a response, i.e. a regular web page.
+An example of a call:
+curl -H 'Content-Type: application / json' 'https://week8.kodaktor.ru/render/?addr=http://kodaktor.ru/j/unsafe_0ebdb' -d '{"random2": "0.4433 "," random3 ":" 0.1199 "} '
+
+If you continue with the structure of the application from the previous tasks, here's how the app.js file is suggested to start:
+
+    export default (express, bodyParser, createReadStream, crypto, http, CORS, writeFileSync) => {
