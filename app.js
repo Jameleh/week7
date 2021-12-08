@@ -69,17 +69,17 @@ app.use(bodyParser.urlencoded({extended:true}))
     const {addr} = req.body;
     r.res.send(addr)
 })
-.post('/insert/', async(req,res)=>{
-const {login,password,URL}=req.body;
-const data=new User({login,password})
+.post('/insert/', async r=>{
+const {login,password,URL}=r.body;
+const data=new User({login,password});
 try{
   await m.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true});
   try{
       await data.save();
-      res.status(201).json({'Добавлено: ':login});
+      r.res.status(201).json({'Добавлено: ':login});
   }
   catch(e){
-      res.status(400).json({'Ошибка: ':'Нет пароля'});
+      r.res.status(400).json({'Ошибка: ':'Нет пароля'});
   }
 }
 catch(e){
