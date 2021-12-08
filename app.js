@@ -71,7 +71,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 })
 .post('/insert/', async r=>{
 
-try {
+
   r.res.set(headers);
   const {login,password,URL}=r.body; 
 console.log("r.body"+password);
@@ -90,10 +90,9 @@ try{
   }
 }
 catch(e){
-  console.log(e.codeName);
+  console.log(`error with connect with dp ${e.codeName}`);
 }   }
-catch(r) {console.log(r);}
-})
+)
  
 
 return app;}
