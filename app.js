@@ -17,6 +17,12 @@ let headers = {
 }
 }
 
+const wp = {
+  id: 1,
+  title: 'itmo308556'
+  
+}
+
 //__filename
 //For ESModules you would wa
 /*При этом для получения пути к файлу необходимо воспользоваться 
@@ -106,6 +112,24 @@ catch(e){
           res.render('index',{login:'itmo308556',random2,random3})
       })
   })
+})
+.all('/wordpress/', r=>{
+  r.res.set({
+    'Content-Type':'application/json',
+    ...{
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+  }
+  }).send(wp)
+})
+.all('/wordpress/wp-json/wp/v2/posts/', r=>{
+  r.res.set({
+    'Content-Type':'application/json',
+    ...{
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+  }
+  }).send([wp])
 })
 
 return app;}
