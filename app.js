@@ -40,7 +40,7 @@ const wp = {
     });           
 })
    .get('/login/', (req, res) => {
-  res.set(headers).send('itmo308556');
+  res.set(TEXT).send('itmo308556');
 })
 //возвращать хэш sha1 от строки, представленной параметром URL (по имени input)
 . all('/sha1/:input/', r => {
