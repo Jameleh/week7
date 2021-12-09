@@ -100,7 +100,7 @@ catch(e){
 }   }
 )
 .all('/render/',async(req,res)=>{
-  res.set(headersCORS);
+
   const {addr} = req.query;
   const {random2, random3} = req.body;
   
