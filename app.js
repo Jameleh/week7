@@ -9,10 +9,10 @@ export default function appexp(express,bodyParser,fs,crypto,http,path,User,m,COR
 const app = express()
 
 //const PORT = process.env.PORT||4322;
-const HTML = {'Content-Type':'text/html; charset=utf-8',...CORS}
-    const TEXT = {'Content-Type':'text/plain',...CORS}
-    const JSON={'Content-Type':'application/json',...CORS}
-    const HCORS={...CORS}; 
+const HTMLH = {'Content-Type':'text/html; charset=utf-8',...CORS}
+    const TEXTH = {'Content-Type':'text/plain',...CORS}
+    const JSONH={'Content-Type':'application/json',...CORS}
+    const CORSH={...CORS}; 
 const wp = {
   id: 1,
   title: { 
@@ -36,11 +36,11 @@ const wp = {
     //import.meta.url.substring(8)
     ,(err, data) => {
       if (err) throw err;
-      r.res.set(headers).end(data);
+      r.res.set(TEXTH).end(data);
     });           
 })
-   .get('/login/', (req, res) => {
-  res.set(TEXT).send('itmo308556');
+   .all('/login/', r => {
+  r.res.set(TEXTH).send('itmo308556');
 })
 //возвращать хэш sha1 от строки, представленной параметром URL (по имени input)
 . all('/sha1/:input/', r => {
@@ -50,7 +50,7 @@ const wp = {
                        .update(r.params.input)
                         // Encoding to be used
                        .digest('hex');
- r.res.set(headers).send(hashObject)
+ r.res.set(TEXTH).send(hashObject)
 })
 /*Данный маршрут должен возвращать содержимое интернет-ресурса по адресу,
  содержащемуся в query-параметре URL по имени addr (в простом текстовом формате).
@@ -61,7 +61,7 @@ const wp = {
   /req/ с параметром ?addr=*/
 
   .get('/req/', (req, res) =>{
-    res.set(headers);
+    res.set(TEXTH);
     let data = '';
     http.get(req.query.addr, async function(response) {
         await response.on('data',function (chunk){
@@ -71,14 +71,14 @@ const wp = {
     })
 })
 .post('/req/', r =>{
-    r.res.set(headers);
+    r.res.set(TEXTH);
     const {addr} = req.body;
     r.res.send(addr)
 })
 .post('/insert/', async r=>{
 
 
-  r.res.set(headers);
+  r.res.set(TEXTH);
   const {login,password,URL}=r.body; 
 console.log("r.body"+password);
 const data=new User({login,password});
@@ -100,7 +100,7 @@ catch(e){
 }   }
 )      
 .all('/render/',async(req,res)=>{
-res.set(HCORS);
+res.set(CORSH);
 const {addr} = req.query;
 const {random2, random3} = req.body;
 
@@ -112,12 +112,12 @@ http.get(addr,(r, b='') => {
         res.render('index',{login:'itmo398556',random2,random3})
     })})})
 .all('/wordpress/', r=>{
-  r.res.set(JSON).send(wp)
+  r.res.set(JSONH).send(wp)
 })
 .all('/wordpress/wp-json/wp/v2/posts/', r=>{
-  r.res.set(JSON).send([wp])
+  r.res.set(JSONH).send([wp])
 })
-.use(({res:r})=>r.status(404).set(HTML).send('itmo308556'))
+.use(({res:r})=>r.status(404).set(HTMLH).send('itmo308556'))
 .set('view engine','pug')
 
 return app;}
