@@ -100,7 +100,10 @@ catch(e){
 }   }
 )
 .all('/render/',async(req,res)=>{
-
+  res.set(...{
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+});
   const {addr} = req.query;
   const {random2, random3} = req.body;
   
