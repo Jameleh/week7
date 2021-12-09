@@ -19,10 +19,12 @@ let headers = {
 const headersJSON={'Content-Type':'application/json',...{
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-}}
+}};
 const wp = {
   id: 1,
-  title: {rendered:'itmo308556'}
+  title: { 
+    rendered : 'itmo308556'
+  }
   
 }
 
