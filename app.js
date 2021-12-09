@@ -30,75 +30,12 @@ const wp = {
  app
  .use(bodyParser.urlencoded({extended:true}))  
  .use(bodyParser.json())       
-.all('/code/', r => {
- console.log(path.join(process.cwd(), 'app.js'));
-  fs.readFile(path.join(process.cwd(), 'app.js')
-    //import.meta.url.substring(8)
-    ,(err, data) => {
-      if (err) throw err;
-      r.res.set(TEXTH).end(data);
-    });           
-})
-   .all('/login/', r => {
+
+ .all('/login/', r => {
   r.res.set(TEXTH).send('itmo308556');
 })
-//возвращать хэш sha1 от строки, представленной параметром URL (по имени input)
-. all('/sha1/:input/', r => {
-  // is used to create a Hash object that can be used to create hash digests by using the stated algorithm.
-  let hashObject=crypto.createHash('sha1')
-                        // updating data
-                       .update(r.params.input)
-                        // Encoding to be used
-                       .digest('hex');
- r.res.set(TEXTH).send(hashObject)
-})
-/*Данный маршрут должен возвращать содержимое интернет-ресурса по адресу,
- содержащемуся в query-параметре URL по имени addr (в простом текстовом формате).
-  Для этого следует воспользоваться методом get модуля http. Т.е. приложение должно обратиться по адресу,
-  который ему передан, прочитать его содержимое и тут же вернуть в качестве ответа.
-  Данный маршрут должен обрабатываться методами GET и POST c возможностью в последнем 
-  случае получить значение addr из тела запроса, например 
-  /req/ с параметром ?addr=*/
-
-  .get('/req/', (req, res) =>{
-    res.set(TEXTH);
-    let data = '';
-    http.get(req.query.addr, async function(response) {
-        await response.on('data',function (chunk){
-            data+=chunk;
-        }).on('end',()=>{})
-        res.send(data)
-    })
-})
-.post('/req/', r =>{
-    r.res.set(TEXTH);
-    const {addr} = req.body;
-    r.res.send(addr)
-})
-.post('/insert/', async r=>{
 
 
-  r.res.set(TEXTH);
-  const {login,password,URL}=r.body; 
-console.log("r.body"+password);
-const data=new User({login,password});
-console.log(data);
-
-
-try{
-  await m.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true});
-  try{
-      await data.save();
-      r.res.status(201).json({'Добавлено: ':login});
-  }
-  catch(e){
-      r.res.status(400).json({'Ошибка: ':'Нет пароля'});
-  }
-}
-catch(e){
-  console.log(`error with connect with dp ${e}`);
-}   }
-)      
 .all('/render/',async(req,res)=>{
 res.set(CORSH);
 const {addr} = req.query;
