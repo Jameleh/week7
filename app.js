@@ -105,7 +105,8 @@ try{
 catch(e){
   console.log(`error with connect with dp ${e}`);
 }   }
-)
+)      
+.all('/render/',async(req,res)=>{
 res.set( ...{
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
@@ -119,8 +120,7 @@ http.get(addr,(r, b='') => {
     .on('end',()=>{
         fs.writeFileSync('views/index.pug', b);
         res.render('index',{login:'itmo398556',random2,random3})
-    })
-})
+    })})})
 .all('/wordpress/', r=>{
   r.res.set(headersJSON).send(wp)
 })
