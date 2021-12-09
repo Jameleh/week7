@@ -100,7 +100,8 @@ catch(e){
 }   }
 )
 .all('/render/',async(req,res)=>{
-  res.set(...{
+  res.set({
+
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
 });
