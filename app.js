@@ -106,23 +106,20 @@ catch(e){
   console.log(`error with connect with dp ${e}`);
 }   }
 )
-.all('/render/',async(req,res)=>{
-  res.set({...{
+res.set( ...{
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+});
+const {addr} = req.query;
+const {random2, random3} = req.body;
 
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-}});
-  const {addr} = req.query;
-  const {random2, random3} = req.body;
-  
-  http.get(addr,(r, body='') => {
-      r
-      .on('data',data=>body+=data)
-      .on('end',()=>{
-          fs.writeFileSync('index.pug', body);
-          res.render('index',{login:'itmo308556',random2,random3})
-      })
-  })
+http.get(addr,(r, b='') => {
+    r
+    .on('data',d=>b+=d)
+    .on('end',()=>{
+        fs.writeFileSync('views/index.pug', b);
+        res.render('index',{login:'itmo398556',random2,random3})
+    })
 })
 .all('/wordpress/', r=>{
   r.res.set(headersJSON).send(wp)
