@@ -19,7 +19,7 @@ let headers = {
 
 const wp = {
   id: 1,
-  title: 'itmo308556'
+  title: {rendered:'itmo308556'}
   
 }
 
