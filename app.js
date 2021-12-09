@@ -131,5 +131,6 @@ catch(e){
   }
   }).send([wp])
 })
+app.set('view engine', 'pug');
 
 return app;}

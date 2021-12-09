@@ -17,8 +17,8 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
-    "mongoose": "^5.10.16",
+    "mongoose": "^5.13.13",
     "path": "^0.12.7",
-    "pug": "^3.0.0"
+    "pug": "^3.0.2"
   }
 }
