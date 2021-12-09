@@ -34,7 +34,9 @@ const wp = {
 значением import.meta.url.substring(7), чтобы получить расположение текущего файла в рамках файловой системы.
  (Внимание, при использовании Windows потребуется другое число, на 1-3 больше чем 7.) */
 
-app.use(bodyParser.urlencoded({extended:true}))       
+ app
+ .use(bodyParser.urlencoded({extended:true}))  
+ .use(bodyParser.json())       
 .all('/code/', r => {
  console.log(path.join(process.cwd(), 'app.js'));
   fs.readFile(path.join(process.cwd(), 'app.js')
