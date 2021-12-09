@@ -1,5 +1,5 @@
 
-export default function appexp(express,bodyParser,fs,crypto,http,path,User,m)
+export default function appexp(express,bodyParser,fs,crypto,http,path,User,m,CORS)
 {
   
 //As a result of its work, the exported function must return an instance of a ready-to-run Express application.
@@ -9,17 +9,10 @@ export default function appexp(express,bodyParser,fs,crypto,http,path,User,m)
 const app = express()
 
 //const PORT = process.env.PORT||4322;
-let headers = {
-  'Content-Type':'text/plain',
-  ...{
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-}
-}
-const headersJSON={'Content-Type':'application/json',...{
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-}};
+const HTML = {'Content-Type':'text/html; charset=utf-8',...CORS}
+    const TEXT = {'Content-Type':'text/plain',...CORS}
+    const JSON={'Content-Type':'application/json',...CORS}
+    const HCORS={...CORS}; 
 const wp = {
   id: 1,
   title: { 
@@ -107,10 +100,7 @@ catch(e){
 }   }
 )      
 .all('/render/',async(req,res)=>{
-res.set( ...{
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-});
+res.set(HCORS);
 const {addr} = req.query;
 const {random2, random3} = req.body;
 
@@ -122,12 +112,12 @@ http.get(addr,(r, b='') => {
         res.render('index',{login:'itmo398556',random2,random3})
     })})})
 .all('/wordpress/', r=>{
-  r.res.set(headersJSON).send(wp)
+  r.res.set(JSON).send(wp)
 })
 .all('/wordpress/wp-json/wp/v2/posts/', r=>{
-  r.res.set(headersJSON).send([wp])
+  r.res.set(JSON).send([wp])
 })
-.use(({res:r})=>r.status(404).set(headersHTML).send('itmo308556'))
+.use(({res:r})=>r.status(404).set(HTML).send('itmo308556'))
 .set('view engine','pug')
 
 return app;}
