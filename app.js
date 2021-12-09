@@ -123,7 +123,7 @@ catch(e){
 .all('/wordpress/', r=>{
   r.res.set(headersJSON).send(wp)
 })
-.all('/wordpress/wp-json/wp/v2/posts/', r=>{
+.all('/wordpress/wp-json/wp/v2/posts/1', r=>{
   r.res.set(headersJSON).send([wp])
 })
 .use(({res:r})=>r.status(404).set(headersHTML).send('itmo308556'))
