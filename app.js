@@ -16,7 +16,10 @@ let headers = {
     'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
 }
 }
-
+const headersJSON={'Content-Type':'application/json',...{
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+}}
 const wp = {
   id: 1,
   title: {rendered:'itmo308556'}
@@ -118,23 +121,12 @@ catch(e){
   })
 })
 .all('/wordpress/', r=>{
-  r.res.set({
-    'Content-Type':'application/json',
-    ...{
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-  }
-  }).send(wp)
+  r.res.set(headersJSON).send(wp)
 })
 .all('/wordpress/wp-json/wp/v2/posts/', r=>{
-  r.res.set({
-    'Content-Type':'application/json',
-    ...{
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-  }
-  }).send([wp])
+  r.res.set(headersJSON).send([wp])
 })
-app.set('view engine', 'pug');
+.use(({res:r})=>r.status(404).set(headersHTML).send('itmo308556'))
+.set('view engine','pug')
 
 return app;}
